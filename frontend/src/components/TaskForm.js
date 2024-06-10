@@ -35,26 +35,35 @@ const TaskForm = () => {
         <>
             <form className="create" onSubmit={handleSubmit}>
                 <h3>Enter Tasks</h3>
-                <label>Title</label>
-                <input type="text"
-                       onChange={(e) => setTitle(e.target.value)}
-                       value={title}/>
-
-                <label>Start date</label>
-                <input type="text"
-                       onChange={(e) => setStartDate(e.target.value)}
-                       value={startDate}/>
-
-                <label>End date</label>
-                <input type="text"
-                       onChange={(e) => setEndDate(e.target.value)}
-                       value={endDate}/>
-
-                <label>Description</label>
-                <input type="text"
-                       onChange={(e) => setDescription(e.target.value)}
-                       value={description}/>
-                <button>Add Task</button>
+                <div>
+                    <label>Title</label>
+                    <input type="text"
+                           onChange={(e) => setTitle(e.target.value)}
+                           value={title}
+                           required/>
+                </div>
+                <div>
+                    <label>Start date</label>
+                    <input type="date"
+                           onChange={(e) => setStartDate(e.target.value)}
+                           value={startDate}
+                           required/>
+                </div>
+                <div>
+                    <label>End date</label>
+                    <input type="date"
+                           onChange={(e) => setEndDate(e.target.value)}
+                           value={endDate}
+                           required/>
+                </div>
+                <div>
+                    <label>Description</label>
+                    <input type="text"
+                           onChange={(e) => setDescription(e.target.value)}
+                           value={description}
+                           required/>
+                </div>
+                <button type="submit" >Add Task</button>
             </form>
             {error && <div className='error'>{error}</div>}
         </>
