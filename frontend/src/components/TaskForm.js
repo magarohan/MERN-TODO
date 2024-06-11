@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 const TaskForm = () => {
     const [title, setTitle] = useState("");
@@ -6,10 +6,25 @@ const TaskForm = () => {
     const [endDate, setEndDate] = useState("");
     const [description, setDescription] = useState("");
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const validateDates = () => {
+        if (new Date(startDate) > new Date(endDate)) {
+            return "End date cannot be before start date.";
+        }
+        return null;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const task = {title, startDate, endDate, description};
+        const validationError = validateDates();
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
+        setLoading(true);
+        setError(null);
+        const task = { title, startDate, endDate, description };
         const response = await fetch('http://localhost:4000/api/tasks/', {
             method: 'POST',
             body: JSON.stringify(task),
@@ -18,17 +33,18 @@ const TaskForm = () => {
             }
         });
         const json = await response.json();
+        setLoading(false);
         if (!response.ok) {
             setError(json.error);
-        }
-        if (response.ok) {
+        } else {
             setError(null);
-            console.log('new task added', json);
+            console.log('New task added', json);
+            setTitle("");
+            setStartDate("");
+            setEndDate("");
+            setDescription("");
+            window.location.reload();  // Reload the page after the task is successfully added
         }
-        setTitle("");
-        setStartDate("");
-        setEndDate("");
-        setDescription("");
     };
 
     return (
@@ -40,30 +56,32 @@ const TaskForm = () => {
                     <input type="text"
                            onChange={(e) => setTitle(e.target.value)}
                            value={title}
-                           required/>
+                           required />
                 </div>
                 <div>
                     <label>Start date</label>
                     <input type="date"
                            onChange={(e) => setStartDate(e.target.value)}
                            value={startDate}
-                           required/>
+                           required />
                 </div>
                 <div>
                     <label>End date</label>
                     <input type="date"
                            onChange={(e) => setEndDate(e.target.value)}
                            value={endDate}
-                           required/>
+                           required />
                 </div>
                 <div>
                     <label>Description</label>
                     <input type="text"
                            onChange={(e) => setDescription(e.target.value)}
                            value={description}
-                           required/>
+                           required />
                 </div>
-                <button type="submit" >Add Task</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Adding Task..." : "Add Task"}
+                </button>
             </form>
             {error && <div className='error'>{error}</div>}
         </>

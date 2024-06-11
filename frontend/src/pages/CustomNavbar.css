@@ -1,0 +1,20 @@
+.nav-link-hover {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link-hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Adjust based on your needs */
+    left: 0;
+    right: 0;
+    height: 2px; /* Adjust the thickness of the outline */
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link-hover:hover::after {
+    background-color: black; /* Outline color */
+  }
+  

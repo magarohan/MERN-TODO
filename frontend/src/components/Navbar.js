@@ -1,14 +1,23 @@
-import { Link } from "react-router-dom"
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import '../pages/CustomNavbar.css';
 
-const Navbar = ()=>{
-    return(
-        <header>
-            <div className="container">
-                <Link to={"/"}>
-                    <h1>TODO</h1>
-                </Link>
-            </div>
-        </header>
-    )
+function CustomNavbar() {
+  return (
+    <>
+      <Navbar bg="light" data-bs-theme="light">
+        <Container>
+          <Navbar.Brand href="#home">TODO APP</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Login/Signup</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    </>
+  );
 }
-export default Navbar
+
+export default CustomNavbar;
