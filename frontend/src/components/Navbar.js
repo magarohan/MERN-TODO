@@ -11,8 +11,7 @@ function CustomNavbar() {
           <Navbar.Brand href="#home">TODO APP</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Login/Signup</Nav.Link>
+            <Nav.Link href="#login">Login/Signup</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

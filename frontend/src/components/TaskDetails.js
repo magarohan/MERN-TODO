@@ -30,7 +30,6 @@ const TaskDetails = ({ task, onDelete }) => {
       <p>Created at: {task.createdAt}</p>
       {error && <p className="error">{error.message}</p>}
       <button className="deleteButton" onClick={() => handleDelete(task._id)}>Delete</button>
-      <button className="editButton">Edit</button>
     </div>
   );
 }
