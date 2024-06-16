@@ -1,12 +1,13 @@
-import {useState, useEffect} from 'react'
+// Home.js
+import { useState, useEffect } from 'react';
 
-//components
-import TaskDetails from '../components/TaskDetails'
-import TaskForm from '../components/TaskForm'
+// components
+import TaskDetails from '../components/TaskDetails';
+import TaskForm from '../components/TaskForm';
 
-const Home = ()=>{
-    const [tasks, setTasks] = useState(null)
-    const [error, setError] = useState("")
+const Home = () => {
+    const [tasks, setTasks] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -25,17 +26,22 @@ const Home = ()=>{
         };
         fetchTasks();
     }, []);
-    
-    return(
-    <div className="home">
-        <div className='tasks'>
-            {tasks && tasks.map((task)=>(
-                <TaskDetails key={task._id} task={task}/>
-            ))}
+
+    const handleDeleteTask = (taskId) => {
+        setTasks((prevTasks) => prevTasks.filter(task => task._id !== taskId));
+    };
+
+    return (
+        <div className="home">
+            <div className='tasks'>
+                {tasks && tasks.map((task) => (
+                    <TaskDetails key={task._id} task={task} onDelete={handleDeleteTask} />
+                ))}
+            </div>
+            <TaskForm />
+            {error && <p className="error">{error}</p>}
         </div>
-        <TaskForm/>
-    </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

@@ -49,3 +49,6 @@ code {
   background-color: #4d6cac;
 }
 
+.deleteButton{
+  background-color: red;
+}
